@@ -11,13 +11,14 @@ void Simulation::initialize(int argc, char **argv) {
     cmd.add(argNode);
     TCLAP::ValueArg<long> argSeed("S", "seed", "Random seed", false, 0, "long");
     cmd.add(argSeed);
-    TCLAP::ValueArg<double> argDegree("d", "degree", "Mean node degree", false, 4, "double");
+    TCLAP::ValueArg<double> argDegree("d", "degree", "Mean node degree", false, 4, "double"); //nb of links that make one node
     cmd.add(argDegree);
     TCLAP::ValueArg<int> argTime("t", "time", "Number of steps to simulate", false, 10, "int");
     cmd.add(argTime);
 
     cmd.parse(argc, argv);
 
+    //Initialise les paramètre du network de manière si les parametres rentré sont inconsistants
     RNG.initialize(argSeed.getValue());
     int nodes(argNode.getValue());
     if (nodes < 1) nodes = RNG.poisson(50);
